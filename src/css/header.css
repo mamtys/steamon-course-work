@@ -1,0 +1,59 @@
+/*header*/
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  color:rgb(230, 214, 214);
+  background-color: rgb(214, 214, 214);
+}
+a{
+  text-decoration: none;
+  color:rgb(230, 228, 228);
+}
+.to-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+header{
+  min-height:100px;
+  width:100%;
+  background-color: rgb(51, 51, 51);
+  background-color: rgb(77, 92, 81);
+}
+.header-container{
+  display: flex;
+  justify-content:space-between;
+  width:960px;
+  line-height: 50px;
+}
+.sign-in{
+  min-width:200px;
+  height:50px;
+  background-color:rgb(97, 143, 97);
+  text-align: center;
+}
+.profile{
+  min-width:200px;
+  text-align:center;
+  color:rgb(230, 228, 228);
+  height:50px;
+  display:flex;
+  flex-direction: column;
+}
+.profile-container{
+  background-color:rgb(97, 143, 97);
+}
+.drop-down{
+  display:none;
+  position: relative;
+  background-color: rgb(77, 92, 81);
+  box-shadow: 0px 10px 10px rgba(0,0,0,0.5);
+}
+.drop-down li{
+  width:200px;
+}
+.profile:hover .drop-down
+{
+  display:block;
+}

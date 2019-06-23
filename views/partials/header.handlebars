@@ -1,0 +1,27 @@
+
+<div class="to-center">
+    <header class="to-center">
+        <div class="header-container"> 
+            <div class="intro">
+                <a class="intro-container" href="/">
+                    <div class="intro-title">Steam Monitor</div>
+                    <div class="intro-subtitle">Find items and monitor prices</div>
+                </a>
+            </div>
+            {{#if user}}
+                <div class="profile">
+                    <div class="profile-container">
+                        <img class="small-avatar" src="{{user.smallAvatar}}" alt="avatar">
+                        <span>{{user.displayName}}</span>
+                    </div>
+                    <ul class="drop-down">
+                        <li><a href="/profile">settings</a></li>
+                        <li><a href="/logout">sign out</a></li>
+                    </ul>
+                </div>
+            {{else}}
+                 <div class="sign-in"><a href="auth/steam">sign-in through steam</a></div>
+            {{/if}}
+        </div>
+    </header>
+</div>

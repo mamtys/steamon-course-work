@@ -1,0 +1,53 @@
+<div class="to-center">
+    <div class="main">
+        <div class="item-table">
+            <div class="item-table-title">
+                <div class="all-items">All items</div>
+                <div class="traced-items">Traced items</div>
+            </div>
+            {{#each items}}
+                <div class="item-block">
+                    <div class="item to-center">
+                        <div class="item-container">
+                            <a href="{{this.url}}">
+                                <img class="item-img" src={{this.smallPhoto}}>
+                            </a>
+                            <a class="item-name-block" href={{this.url}}>
+                                <div class="item-name">{{this.itemName}}</div>
+                                <div class="item-game-name">{{this.gameName}}</div>
+                            </a>
+                            <div class="some" id="show-trace">click</div>
+                        </div>
+                    </div>
+                    <div class="trace to-center">
+                        <div class="trace-container">
+                            {{#if ../user}}
+                                {{#if ../sets}}
+                                    <div class="trace-wraper">
+                                        <span class="trace-title">Your lot bet</span>
+                                        <input type="text" name="item-price" id="inp-price">
+                                        <span class="trace-curancy">rub</span>
+                                    </div>
+                                    <button id="trace-btn">Trace</button>
+                                {{else}}
+                                    <span>Please fill your <a href="/profile">settings</a></span>
+                                {{/if}}
+                            {{else}}
+                                <span>Please login first</span>
+                            {{/if}}
+                        
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        <div class="search-item ">
+            <div class="search-container">
+                <span>Search items</span>
+                <input type="text" name="item-name" id="inp-name">
+            </div>
+            <div class="srch-options">display options</div>
+        </div>
+    </div>
+</div>
+<script src="./js/js.js"></script>

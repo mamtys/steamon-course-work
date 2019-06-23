@@ -1,0 +1,4 @@
+var css1 = require(".public/css/reset.css");
+var css3 = require(".public/css/header.css");
+var css2 = require(".public/css/index.css");
+var css4 = require(".public/css/profile.css");

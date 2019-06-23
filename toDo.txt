@@ -1,0 +1,18 @@
+logger
+btns arrays, show more etc.
+find out acceptable requests's frequency(market/render)
+	//after ~50-100 with 1 sec delay reqs steam sends trash files
+ 	//examples at public/components
+	//mb divide reqs on parts instead of delays
+profile page
+telegram long polling
+reorgonize check actual price logic
+add lowest sell price to trace
+search options
+footer
+add more ajax
+agregate lookup для объединения Traced c Items or another solution
+get img from steam cdn or use downloaded?
+replace full url in db to stortened
+validate input
+finally minificate + babel
