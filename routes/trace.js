@@ -20,8 +20,7 @@ router.post('/', (req, res) => {
 			if(item) updateTrace(
 				req.user.id,
 				req.user.sets.telegram,
-				queryParams,
-				item)
+				queryParams)
 				.then((success)=>{
 					if(success)
 						res.send('OK');
@@ -61,6 +60,7 @@ function updateTrace(id,tel,{_id,value,item}){
 					duplicate.value=value;
 				} else
 					curTrace.lots.push({_id,value,item});
+
 				curTrace.save().catch((err)=>{
 					console.error(err);
 					bool=false;	 
@@ -69,11 +69,7 @@ function updateTrace(id,tel,{_id,value,item}){
 				const tr=new Trace({
 					_id: id,
 					telegram: tel,
-					lots:{
-						_id: _id,
-						value: value,
-						item: item
-					}
+					lots:{_id, value, item}
 				});
 				tr.save().catch((err)=>{
 					console.error(err);

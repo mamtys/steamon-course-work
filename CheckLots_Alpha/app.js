@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 
 
 
@@ -44,43 +45,42 @@ let Url={
 		https.get(this.url, (res) => {
 		// console.log('statusCode:', res.statusCode);
 		//console.log('headers:', res.headers);
-		let data='';
-		res.on('data', (d) => {
-			data+=d;
-		});
-		res.on("error",(e)=>{
-			console.error(e)
-		});
-		res.on('end',()=>{
-			if (res.complete)
-				callback(data)
-			else console.error('The connection was terminated while the message was still being sent');
-		})
+			let data='';
+			res.on('data', (d) => {
+				data+=d;
+			});
+			res.on('error',(e)=>{
+				console.error(e);
+			});
+			res.on('end',()=>{
+				if (res.complete)
+					callback(data);
+				else console.error('The connection was terminated while the message was still being sent');
+			});
 		}).on('error', (e) => {
 			console.error(e);
 		});
 	},
 	getItems:function(maxNumb,callback){
 		Item.find({}).limit(maxNumb).exec((err,items)=>{
-		if(err) console.error(err);
-		else callback(items);
-	})}
+			if(err) console.error(err);
+			else callback(items);
+		});}
 };
 
 Url.getItems(10,(items)=>{
-let intervalObj = setTimeout(function run(){
+	let intervalObj = setTimeout(function run(){
 		items.forEach((e)=>{
 			Url.init(5,e._id);
 			Url.getData((info)=>{
 				try{
 					let data=JSON.parse(info);
 					let highestBuy=data.highest_buy_order;
-					let lowestSell=data.lowest_sell_order;
-					console.log(e.itemName,highestBuy, lowestSell);
-					console.log("///////////////////////");
+					let lowestSell=data.lowest_sell_order;//todo
+
 					e.highestBuyOrder=highestBuy;
 					e.save()
-						.catch((err)=>{console.error(err)});
+						.catch((err)=>{console.error(err);});
 				}catch(er){
 					console.error(er);
 					console.error(info);
@@ -91,7 +91,7 @@ let intervalObj = setTimeout(function run(){
 		});
 		if(intervalObj===null)intervalObj=setTimeout(run,300000);
 		else intervalObj=setTimeout(run,10000);
-}, 10000);
+	}, 10000);
 });
 
 let timeObj = setTimeout(function run(){
@@ -103,17 +103,17 @@ let timeObj = setTimeout(function run(){
 				Item.findById(lot._id)
 					.then((it)=>{
 						if(parseInt(it.highestBuyOrder)/100-parseInt(lot.value)>=0){
-							let message="You was outbitted\n"
-								+"item: "+it.itemName+"\n"
-								+"your bet: " + lot.value+"\n"
-								+"current bet: " + it.highestBuyOrder+"\n"
-								+"url: "+it.url+"\n";
-								message=encodeURIComponent(message);
+							let message='You was outbitted\n'
+								+'item: '+it.itemName+'\n'
+								+'your bet: ' + lot.value+'\n'
+								+'current bet: ' + it.highestBuyOrder+'\n'
+								+'url: '+it.url+'\n';
+							message=encodeURIComponent(message);
 							let path=keys.telegram.path+'?chat_id='
 								+trace.telegram+'&text='+message;
 							httpPost(keys.telegram.host,keys.telegram.path+'?chat_id='+trace.telegram+'&text='
 								+message,(data)=>{
-									console.log(data);
+								console.log(data);
 							});
 							//console.log(it,"more")
 							trace.lots.remove(lot._id);
@@ -124,8 +124,8 @@ let timeObj = setTimeout(function run(){
 						}
 					})
 					.catch((err)=>console.error(err));
-			})
-		})
+			});
+		});
 	}).catch((err)=>console.error(err));
 	timeObj=setTimeout(run,10000);
 },10000);
@@ -144,7 +144,7 @@ function httpPost(host,path,callback){
 	 // console.log('headers:', res.headers);
 		let data='';
 		res.on('data', (d) => {
-		data+=d;
+			data+=d;
 		});
 		res.on('end',()=>{
 			if(callback) callback(data);
@@ -158,9 +158,9 @@ function httpPost(host,path,callback){
 }
 /// catch 404 and forward to error handler
 app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+	const err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 

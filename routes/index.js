@@ -5,20 +5,21 @@ const Item=require('../models/item-model');
 
 
 router.get('/', (req, res) => { 
-	res.render('index');
-	/*
+	
 	let number = parseInt(req.query.number) || 10;
 	getItems('-nameItem',number,(items)=>{
 		res.render('index', {
 			user: req.user,
 			items:items
 		});
-	});*/
+	});
 });
 
 router.get('/items', (req, res) => { 
+	console.log(req);
 	let number = parseInt(req.query.number) || 10;
 	getItems('-nameItem',number,(items)=>{
+		console.log(req.user);
 		res.send({items,sets:req.user.sets});
 	});
 });

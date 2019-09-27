@@ -1,21 +1,58 @@
 <div class="to-center">
     <div class="main">
-        <div class="item-table" id="item-table">
+        <div class="item-table">
             <div class="item-table-title"  id="display-items">
-                <div class="all-items" >All items</div>
-                <div class="traced-items" >Traced items</div>
+                <div class="all-items" href="/">All items</div>
+                <div class="traced-items" href="/trace">Traced items</div>
             </div>
             <div id="item-list">
+                {{#each items}}
+                    <div class="item-block">
+                        <div class="item to-center">
+                            <div class="item-container">
+                                <a href="{{this.url}}">
+                                    <img class="item-img" src={{this.smallPhoto}}>
+                                </a>
+                                <a class="item-name-block" href={{this.url}}>
+                                    <div class="item-name">{{this.itemName}}</div>
+                                    <div class="item-game-name">{{this.gameName}}</div>
+                                </a>
+                                <div class="some" id="show-trace">
+                                    <img class="double-down-svg" src="./img/down.svg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trace">
+                            <div class="to-center">
+                                <div class="trace-container">
+                                    {{#if ../user}}
+                                        {{#if ../user.sets.telegram}}
+                                            <div class="trace-wraper">
+                                                <span class="trace-title">Your lot bet</span>
+                                                <input type="text" name="item-price" class="inp-price">
+                                                <span class="trace-curancy">{{../user.sets.currency}}</span>
+                                            </div>
+                                            <button class="trace-btn" code={{this._id}}>Trace</button>
+                                        {{else}}
+                                            <span>Please fill your <a href="/profile">settings</a></span>
+                                        {{/if}}
+                                    {{else}}
+                                        <span>Please login first</span>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
-            <div id="traced-item-list">
-            </div>
+            <div></div>
         </div>
         <div class="search-item ">
             <form class="search-container" method="get" action="/search">
                 <span>Search items</span>
                 <span>
-                    <input type="text" name="q" id="inp-name">
-                    <input type="submit"  id="inp-srch-submit" value="">
+                <input type="text" name="q" id="inp-name">
+                <input type="submit"  id="inp-srch-submit" value="">
                 </span>
             </form>
             <div class="srch-options" id="opt-btn">display options</div>
@@ -24,3 +61,5 @@
 </div>
 <script src="../js/index.js">
 </script>
+
+

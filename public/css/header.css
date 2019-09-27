@@ -3,6 +3,7 @@ body{
   font-family:Arial, Helvetica, sans-serif;
   color:rgb(230, 214, 214);
   background-color: rgb(214, 214, 214);
+  overflow-y: scroll;
 }
 a{
   text-decoration: none;

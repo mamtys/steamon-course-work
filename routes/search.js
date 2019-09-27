@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
 	serchItems(req.query.q,number,(item)=>{
 		console.log(item);
 		res.render('search', {
+			user: req.user,
 			items:item
 		});
 	});

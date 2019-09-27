@@ -27,10 +27,10 @@ function getData(res){
 	let gameNameList=[];
 	let urlList=[];
 	for(let i=0;i<res.length;i++){
-		imgList[i]=keys.steam.img+res[i].asset_description.icon_url+'/62fx62f';
-		nameList[i]=res[i].hash_name;
-		gameNameList[i]=res[i].app_name;
-		urlList[i]=keys.steam.listings
+		imgList[i]=keys.steam.img+res[i].asset_description.icon_url+'/62fx62f'; //ссылки на изображение
+		nameList[i]=res[i].hash_name; //название предмета
+		gameNameList[i]=res[i].app_name; //название игры
+		urlList[i]=keys.steam.listings  //ссылка на предмет
 			+res[i].asset_description.appid
 			+'/'
 			+encodeURI(res[i].hash_name);

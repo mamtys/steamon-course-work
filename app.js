@@ -20,9 +20,9 @@ const profile = require('./routes/profile');
 const search = require('./routes/search');
 const trace = require('./routes/trace');
 
-const mongoConnect = require('./config/mongo-connect');
-const passportSetup = require('./config/passport-setup');
-const dataUpdate = require('./steamItemsData/save-data');
+require('./config/mongo-connect');
+require('./config/passport-setup');
+require('./steamItemsData/save-data');
 
 
 const app = express();

@@ -34,17 +34,17 @@
 				<div class="to-center">
 					<div class="trace-container">
 						${ (this.curItems.sets) ?
-							(this.curItems.sets.telegram) ?
-								`<div class="trace-wraper">
+		(this.curItems.sets.telegram) ?
+			`<div class="trace-wraper">
 									<span class="trace-title">Your lot bet</span>
 									<input type="text" name="item-price" class="inp-price">
 									<span class="trace-curancy">${this.curItems.sets.currency}</span>
 								</div>
 								<button class="trace-btn" code=${this.curItems.items[i]._id}>Trace</button>`
-							: '<span>Please fill your <a href="/profile">settings</a></span>'
+			: '<span>Please fill your <a href="/profile">settings</a></span>'
 						
-						: '<span>Please login first</span>'
-						}
+		: '<span>Please login first</span>'
+	}
 					</div>
 				</div>
 			</div>
@@ -137,14 +137,47 @@
 				document.getElementById('traced-item-list').innerHTML=this.tracedItemBlocks;
 		}
 	};
+
+	let showTrace=document.getElementsByClassName('double-down-svg');
+	[...showTrace].forEach(el =>
+		el.addEventListener('click',()=>{
+			let traceDiv=el.parentElement.parentElement.parentElement.nextElementSibling;
+			if(traceDiv.style.display=='flex') {
+				traceDiv.style.display='none';
+			  
+				el.src='../img/down.svg';
+			}
+			else {
+				traceDiv.style.display='flex';
+				el.src='../img/eye.svg';
+			}
+		}));
+	let traceBtn=document.getElementsByClassName('trace-btn');
+	let value=document.getElementsByClassName('inp-price');
+	[...value].forEach((el)=>{
+		el.addEventListener('input',(e)=>{
+			let txt=e.target.value;
+			let len=e.target.value.length;
+			if(len>5)
+				e.target.value=txt.slice(0,5-len);
+		});
+	});
+	[...traceBtn].forEach((el)=>{
+		el.addEventListener('click',(e)=>{
+			let id=e.target.attributes.code.value;
+			let inp=e.target.previousElementSibling.lastElementChild.previousElementSibling;
+			if(isNaN(inp.value)){
+				alert('input not valid');
+				return;
+			}
+			let params = 'value=' + encodeURIComponent(inp.value)+'&id='
+				+ encodeURIComponent(id);
+			xhrRequest('post','/trace?'+params);
+		});
+	});
+
 	let itemList=document.getElementById('item-list');
 	document.addEventListener('DOMContentLoaded',()=>{		
-		data.getItems(20)
-			.then(()=>{
-				data.getItemBlocks();
-				data.pushItemsToDom(itemList);
-				data.addItemEvents();
-			});
 		data.getTracedItems(20)
 			.then(()=>{
 				data.getTracedItemBlocks();
@@ -152,6 +185,8 @@
 				data.addTracedItemEvents();
 			});	
 	});
+
+	
 	
 	let displayItems=document.getElementById('display-items');
 	[...displayItems.children].forEach(el=>
